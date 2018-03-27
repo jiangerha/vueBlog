@@ -4,12 +4,35 @@
             <p class="headline" id="callMe">Contact me</p>
         </a>
         <div class="email animated fadeIn">
-            <input type="text" placeholder=" 邮件主题" v-model="subject"/>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="email-theme" class="col-sm-2 control-label">邮件主题</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="email-theme" placeholder="请输入邮件主题"  v-model="subject"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email-address" class="col-sm-2 control-label">邮箱</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="email-address" placeholder="请输入邮箱"  v-model="address"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email-content" class="col-sm-2 control-label">邮件内容</label>
+                    <div class="col-sm-10">
+                        <textarea type="text" class="form-control" id="email-content" placeholder="请输入邮件内容" v-model="content"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="sendEmail btn btn-primary btn-lg" @click="send" :disabled="sendFlag">
+                        {{sendFlag ? '发送中...' : '确认'}}
+                    </button>
+                </div>
+            </form>
+            <!-- <input type="text" placeholder="请输入邮件主题" v-model="subject">
             <input type="text" placeholder=" 邮箱" v-model="address"/>
-            <textarea placeholder=" 来唠唠嗑呗" spellcheck="false" v-model="content"></textarea>
-            <button class="sendEmail" @click="send" :disabled="sendFlag">
-                <span>{{sendFlag ? '发送中...' : '确认'}}</span>
-            </button>
+            <textarea placeholder=" 来唠唠嗑呗" spellcheck="false" v-model="content"></textarea> -->
+           
         </div>
     </div>
 </template>
@@ -28,6 +51,8 @@ export default {
     created () {
         this.set_headline({
             content: 'Tags',
+            src:'../../../static/something_bg.jpg',
+            description:"This is Dora.",
             animation: 'animated rotateIn'
         })
     },
@@ -79,7 +104,6 @@ export default {
 <style lang="scss" rel="stylesheet/scss" scoped>
 .contact {
     min-height: 30rem;
-    background: rgba(55, 57, 65, 0.2);
     padding: 2rem 1rem 2rem;
     .title {
         padding-top: 3.125rem;
@@ -92,19 +116,22 @@ export default {
         width: 40%;
         margin: 2rem auto 0;
         input {
-            color: #ffffff;
+            color: #666;
             font-size: 1.125rem;
             border: 0.125rem solid rgb(129, 216, 208);
             width: 70%;
-            height: 1.5625rem;
+            height: 34px;
             margin-bottom: 1.25rem;
             display: block;
             background: transparent;
+            border:1px solid #d8d8d8;
+            outline:none;
+            text-indent:1em;
+            border-radius:6px;
         }
         textarea {
-            color: #ffffff;
+            color: #666;
             font-size: 1.125rem;
-            border: 0.125rem solid rgb(129, 216, 208);
             width: 100%;
             height: 15rem;
             resize: none;
@@ -114,17 +141,22 @@ export default {
         .sendEmail {
             width: 6.25rem;
             margin-top: 0.625rem;
-            margin-left: calc(100% - 6.25rem);
+            /* margin-left: calc(100% - 6.25rem); */
+        }
+        .form-group{
+            &:last-child{
+                text-align: right;
+                margin-right:15px;
+            }
         }
     }
 }
 p.headline {
     margin: 0 auto 0;
     text-align: center;
-    color: #fff;
-    font-size: 2rem;
+    color: #333;
+    font-size: 24px;
     padding-bottom: 1.25rem;
-    border-bottom: 0.3125rem double rgb(129, 216, 208);
 }
 @media screen and (max-width: 440px) {
     /*.title, .email {*/

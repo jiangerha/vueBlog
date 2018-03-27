@@ -51,7 +51,7 @@ export default {
             display: none;
         }
         #app {
-            background: #000;
+            background: #fff;
         }
     }
 </style>

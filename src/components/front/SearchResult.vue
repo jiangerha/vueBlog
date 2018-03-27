@@ -18,7 +18,7 @@
 
 <script>
 import {mapState, mapActions, mapMutations, mapGetters}     from 'vuex'
-import spinner                                              from '../share/spinner'
+// import spinner                                              from '../share/spinner'
 
 export default {
     data () {
@@ -30,6 +30,7 @@ export default {
         this.searchArticles({key: 'title', value: this.$route.params.text})
         this.set_headline({
             content: '搜索结果',
+            // src:'../../../static/header_bg.jpg',
             animation: 'animated rotateIn'
         })
     },

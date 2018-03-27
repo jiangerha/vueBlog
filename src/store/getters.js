@@ -21,6 +21,17 @@ export default {
         })
         return articles
     },
+    smArticles:(state) =>{
+        const articles = state.articles.map(article =>{
+            let smArticle = {};
+            for(let i in article){
+                smArticle[i] = article[i]
+            }
+            // smArticle.description = marked(article.description || '');
+            return smArticle
+        })
+        return articles
+    },
     allTags: (state) => {
         state.tags.unshift('全部')
         return state.tags

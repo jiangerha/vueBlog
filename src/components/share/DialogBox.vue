@@ -4,8 +4,8 @@
         <i class="iconfont icon-icon13" @click="close"></i>
         <p><span>{{dialog.info}}</span></p>
         <div class="choice">
-        <button class="sure" @click="confirm">确定</button>
-        <button class="cancel" v-if="dialog.hasTwoBtn" @click="cancel">取消</button>
+        <button class="sure btn btn-primary btn-md" @click="confirm">确定</button>
+        <button class="cancel btn btn-default" v-if="dialog.hasTwoBtn" @click="cancel">取消</button>
         </div>
     </div>
 </div>
@@ -46,6 +46,7 @@ export default {
     top: 0;
     left: 0;
     background: rgba(2, 2, 2, 0.8);
+    z-index: 10;
     div.center {
         position: absolute;
         top: 0;
@@ -89,19 +90,19 @@ export default {
     color: #00193a;
     width: 100%;
     .sure {
-        width: 30%;
+        /* width: 30%;
         padding: 0 1rem;
         &:hover {
              color: #ffffff;
-         }
+         } */
     }
     .cancel {
-        width: 30%;
+        /* width: 30%;
         background: #fc8c84;
         padding: 0 1rem;
         &:hover {
              color: #ffffff;
-         }
+         } */
     }
 }
 button {

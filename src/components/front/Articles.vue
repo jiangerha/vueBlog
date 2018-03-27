@@ -1,37 +1,41 @@
 <template>
-    <div class="articleContent">
-        <div id="articles">
-            <div class="tags animated fadeIn">
-                <div class="tagFlex">
-                    <button
-                          v-for="(tag, index) in allTags"
-                          v-bind:class="{activeBtn: selectIndex === index}"
-                          v-on:click="switchTag({value: tag, page: 1}, index, tag)"
-                          >
-                        <span>{{tag}}</span>
-                    </button>
+    <div class="container">
+        <div class="row">
+                <div class="articleContent col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div id="articles">
+                        <div class="tags animated fadeIn">
+                            <div class="tagFlex">
+                                <button
+                                        v-for="(tag, index) in allTags"
+                                        v-bind:class="{activeBtn: selectIndex === index}"
+                                        v-on:click="switchTag({value: tag, page: 1}, index, tag)"
+                                        >
+                                    <span>{{tag}}</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div v-for="(article, index) in reducedArticles" id="article" class="animated fadeIn">
+                            <router-link :to="{name: 'article', params: {id: article.aid, index: index, page: page}, hash: '#article'}" tag="div" exact>
+                                <h2>{{article.title}}</h2>
+                                <time><i class="iconfont icon-shijian"></i>{{article.date | toDate}}</time>
+                                <span class="articleTag"><i class="iconfont icon-label"></i>{{article.tags | toTag}}</span>
+                                <span class="commentNumber"><i class="iconfont icon-huifu"></i>{{article.comment_n}}</span>
+                                <p>{{article.description}}</p>
+                            </router-link>
+                        </div>
+                        <p v-if="!loadMore" v-show="!noMore" class="noMore animated fadeIn">下拉加载更多</p>
+                        <p v-if="noMore" class="noMore animated fadeIn">已经到底了，别扯了</p>
+                    </div>
+                    <!-- <spinner v-show="loadMore" class="spinner"></spinner> -->
                 </div>
-            </div>
-            <div v-for="(article, index) in reducedArticles" id="article" class="animated fadeIn">
-                <h2>{{article.title}}</h2>
-                <time><i class="iconfont icon-shijian"></i>{{article.date | toDate}}</time>
-                <span class="articleTag"><i class="iconfont icon-label"></i>{{article.tags | toTag}}</span>
-                <span class="commentNumber"><i class="iconfont icon-huifu"></i>{{article.comment_n}}</span>
-                <p>{{article.content}}</p>
-                <router-link :to="{name: 'article', params: {id: article.aid, index: index, page: page}, hash: '#article'}" tag="button" exact>
-                    <span>Continue reading</span>
-                </router-link>
-            </div>
-            <p v-if="!loadMore" v-show="!noMore" class="noMore animated fadeIn">下拉加载更多</p>
-            <p v-if="noMore" class="noMore animated fadeIn">已经到底了，别扯了</p>
         </div>
-        <spinner v-show="loadMore" class="spinner"></spinner>
     </div>
+    
 </template>
 
 <script>
 import {mapMutations, mapActions, mapGetters, mapState}     from 'vuex'
-import spinner                                              from '../share/spinner'
+// import spinner                                              from '../share/spinner'
 
 export default {
     data () {
@@ -52,7 +56,7 @@ export default {
         this.getAllTags()
     },
     computed: {
-        ...mapGetters(['reducedArticles', 'allTags']),
+        ...mapGetters(['reducedArticles', 'allTags','smArticles']),
         ...mapState(['curTag', 'loadMore', 'moreArticle', 'isLoading', 'noMore'])
     },
     mounted () {
@@ -86,7 +90,7 @@ export default {
         }
     },
     components: {
-        spinner
+        // spinner
     }
 }
 
@@ -95,36 +99,48 @@ export default {
 <style lang="scss" rel="stylesheet/scss" scoped>
 .articleContent {
     #articles {
-        padding: 1.875rem 12.5rem 0;
+        padding-top: 1.875rem;
+        >div{
+            cursor: pointer;
+        }
         .tags {
             .tagFlex {
-                display: flex;
+                /* display: flex; */
                 flex-wrap: wrap;
                 justify-content: space-around;
                 .activeBtn {
-                    background: #ffc520;
+                    background: rgb(47, 147, 180);
                     color: #ffffff;
                     transition:  1s;
                 }
                 button {
                     transition:  1s;
-                    padding-left: 1rem;
-                    padding-right: 0.2rem;
                     text-align: center;
-                    background: rgb(129, 216, 208);
-                    color: #00193a;
+                    background: rgb(187, 187, 238);
                     margin: 0 1.25rem 1.25rem 0;
+                    outline: none;
+                    border: none;
+                    border-radius: 15px;
+                    line-height: 30px;
+                    span{
+                        color: #fff;
+                        display: inline-block;
+                        padding:0 10px;
+                    }
                 }
             }
         }
         div#article {
-            color: #fff;
+            color: #666;
             width: 100%;
-            border-bottom: 0.125rem solid rgb(129, 216, 208);
+            border-bottom: 1px solid #eee;
             h2 {
-                color: rgb(129, 216, 208);
+                color: #333;
                 margin-top: 1.875rem;
                 margin-bottom: 1.25rem;
+                font-size:18px;
+                margin: 20px 0 10px 0;
+                line-height: 18px;
             }
             time {
                 margin-top: 0.625rem;
@@ -135,6 +151,7 @@ export default {
                 word-wrap: break-word;
                 margin-top: 1.875rem;
                 margin-bottom: 1.875rem;
+                color: #a3a3a3;
             }
             button {
                 width: 8.75rem;

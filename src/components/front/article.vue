@@ -32,7 +32,8 @@
 <script>
 import marked                                       from 'marked'
 import hljs                                         from 'highlight.js'
-import {mapState, mapActions}                       from 'vuex'
+// import {mapState, mapActions}                       from 'vuex'
+import {mapMutations, mapActions, mapGetters, mapState}     from 'vuex'
 import ArticleComment                               from './component/ArticleComment'
 import ArticleList                                  from './component/ArticleList'
 
@@ -58,6 +59,13 @@ export default {
         }
     },
     created () {
+        this.set_headline({
+            content: 'Tags',
+            title: 'Something',
+            src:'../../../../static/something_bg.jpg',
+            description:"something",
+            animation: 'animated bounce'
+        })
         this.getArticle(this.$route.params.id)
         this.initPage()
     },
@@ -90,6 +98,7 @@ export default {
     },
     methods: {
         ...mapActions(['getArticle', 'getAllArticles']),
+        ...mapMutations(['set_headline']),
         mark: marked,
         initPage () {
             const index = this.$route.params.index - 0

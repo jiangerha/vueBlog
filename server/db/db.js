@@ -19,6 +19,7 @@ const ArticleSchema = new Schema(
         aid: { type : Number, index: { unique: true } },
         title: String,
         content: String,
+        description:String,
         tags: [String],
         date: Date,
         isPublish: Boolean,

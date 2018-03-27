@@ -18,9 +18,10 @@ const account = resolve => require(['@/components/back/account'], resolve)
 const SearchResult = resolve => require(['@/components/front/SearchResult'], resolve)
 
 Vue.use(Router)
-
+  
 const router = new Router({
     mode: 'history',
+    base: '/blog/', 
     scrollBehavior (to, from, savedPosition) {
         if (to.hash) {
             return {
@@ -36,12 +37,12 @@ const router = new Router({
             redirect: 'home',
             component: index,
             children: [
-                {path: 'home', name: 'home', component: Home, meta: {title: '博客首页'}},
-                {path: 'about', name: 'about', component: About, meta: {title: '关于我'}},
-                {path: 'articles', name: 'articles', component: Articles, meta: {title: '学习笔记分享'}},
+                {path: 'home', name: 'home', component: Home, meta: {title: 'dora blog'}},
+                {path: 'about', name: 'about', component: About, meta: {title: 'about'}},
+                {path: 'articles', name: 'articles', component: Articles, meta: {title: 'share'}},
                 {path: 'articles/:id', name: 'article', component: article},
-                {path: 'contact', name: 'contact', component: contact, meta: {title: '联系站长'}},
-                {path: 'search/:text', name: 'SearchResult', component: SearchResult, meta: {title: '搜索结果'}}
+                {path: 'contact', name: 'contact', component: contact, meta: {title: 'contact'}},
+                {path: 'search/:text', name: 'SearchResult', component: SearchResult, meta: {title: 'result'}}
             ]
         },
         {

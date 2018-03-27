@@ -74,7 +74,7 @@ export default {
 <style lang="scss" rel="stylesheet/scss" scoped>
 .nav_container{
     position: absolute;
-    z-index: 100;
+    z-index: 5;
     width: 100%;
 }
 
@@ -143,6 +143,9 @@ export default {
     }
 }
 @media(min-width:768px){
+    .header{
+        height: 450px;
+    }
     #nav{
         .nav_link{
             float: right;
