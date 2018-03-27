@@ -1,12 +1,39 @@
 <template>
 <div class="dialog">
+    <!-- <div class="modal" id="reminder" tabindex="-1" role="dialog" aria-labelledby="reminderLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"  @click="close">
+                        &times;
+                    </button>
+                        <h4 class="modal-title" id="reminderLabel">提示</h4>
+                    </div>
+                    <div class="modal-body">{{dialog.info}}</div>
+                    <div class="modal-footer">
+                        <button class="sure btn btn-primary btn-md" @click="confirm">确定</button>
+                        <button type="button" class="cancel btn btn-default"  v-if="dialog.hasTwoBtn" @click="cancel">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
     <div class="center">
-        <i class="iconfont icon-icon13" @click="close"></i>
-        <p><span>{{dialog.info}}</span></p>
-        <div class="choice">
+        <div class="modal-header">
+            <h4 class="modal-title" id="reminderLabel">提示</h4>
+            <i  @click="close">&times;</i>
+        </div>
+        <div class="modal-content">
+            {{dialog.info}}
+        </div>
+        <div class="modal-footer">
+            <button class="sure btn btn-primary btn-md" @click="confirm">确定</button>
+            <button type="button" class="cancel btn btn-default"  v-if="dialog.hasTwoBtn" @click="cancel">取消</button> 
+        </div>
+        <!-- <div class="choice">
         <button class="sure btn btn-primary btn-md" @click="confirm">确定</button>
         <button class="cancel btn btn-default" v-if="dialog.hasTwoBtn" @click="cancel">取消</button>
-        </div>
+        </div> -->
     </div>
 </div>
 </template>
@@ -16,6 +43,9 @@ import {mapState, mapMutations}   from 'vuex'
 export default {
     computed: {
         ...mapState(['dialog'])
+    },
+    mounted(){
+        
     },
     methods: {
         ...mapMutations(['set_dialog']),
@@ -54,59 +84,29 @@ export default {
         bottom: 0;
         right: 0;
         width: 30%;
-        height: 35%;
+        height: 20%;
+        max-width:35%;
         overflow: auto;
         margin: auto;
-        background: #C0CCDA;
+        background: #fff;
         border-radius: 0.5rem;
         i {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            color: #fc8c84;
-            font-size: 1rem;
+            color: #333;
+            font-size: 24px;
             cursor: pointer;
             &:hover {
-                color: darkturquoise;
+                color: #666;
              }
         }
-        p {
-            height: calc(100% - 4rem);
-            width: calc(100% - 2rem);
-            text-align: center;
-            display: table;
-            padding: 0 1rem;
-            span {
-                display: table-cell;
-                vertical-align: middle;
-            }
-        }
     }
 }
-.choice {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: nowrap;
-    color: #00193a;
-    width: 100%;
-    .sure {
-        /* width: 30%;
-        padding: 0 1rem;
-        &:hover {
-             color: #ffffff;
-         } */
-    }
-    .cancel {
-        /* width: 30%;
-        background: #fc8c84;
-        padding: 0 1rem;
-        &:hover {
-             color: #ffffff;
-         } */
-    }
-}
-button {
-    margin-top: 0;
+.modal-content{
+    padding: 15px 10px;
+    border: none;
+    box-shadow: none;
 }
 @media screen and (max-width: 440px) {
     .center {
