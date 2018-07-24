@@ -15,7 +15,7 @@
             <td>{{article.date | toDate}}</td>
             <td>
                 <router-link :to="{name: 'editor', query: {aid: article.aid}}" class="iconfont icon-biji-copy" tag="i"></router-link>
-                <i class="iconfont icon-shanchu" @click="deleteConfirm(article.aid)"></i>
+                <i class="iconfont icon-shanchu" @click="deleteConfirm(article.aid)">删除</i>
             </td>
         </tr>
         </tbody>

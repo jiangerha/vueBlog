@@ -3,14 +3,14 @@ const nodemailer = require('nodemailer')
 let transporter = nodemailer.createTransport({
     service: '126',
     auth: {
-        user: 'blogbutler@126.com',
+        user: 'jiangerha@126.com',
         pass: '123456abc'
     }
 })
 
 exports.send = function(to, subject, html, res) {
     const mailOptions = {
-        from: '"博客小管家" <blogbutler@126.com>',
+        from: '"博客小管家" <jiangerha@126.com>',
         to : to,
         subject : subject,
         html : html
